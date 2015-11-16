@@ -5,13 +5,11 @@ public class ThrowAction : MonoBehaviour {
     public delegate void Vector3Delegate(Vector3 value);
     public event Vector3Delegate ThrowObjectAction;
 
-    public Transform hand;
-
     private PlayerInput _playerInput;
 
     void Awake ()
     {
-        _playerInput = GetComponent<PlayerInput>();
+        _playerInput = GetComponentInParent<PlayerInput>();
     }
 
 	void Start () {

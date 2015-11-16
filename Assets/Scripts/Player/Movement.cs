@@ -56,7 +56,7 @@ public class Movement : MonoBehaviour {
         Vector3 movement = new Vector3(1, 0, 0);
         movement.x *= dir;
         _rigidbody.transform.position += movement * _dampSpeed * Time.deltaTime;
-        transform.localScale = new Vector3(transform.localScale.x * dir, transform.localScale.y, transform.localScale.z);
+        transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * dir, transform.localScale.y, transform.localScale.z);
     }
 
     /// <summary>
@@ -76,13 +76,12 @@ public class Movement : MonoBehaviour {
     }
 
     /// <summary>
-    /// Checks in which direction you touch a object.
+    /// Checks in which direction you start to touch a object.
     /// </summary>
     /// <param name="other"></param>
     /// <param name="dir"></param>
     private void OnTouchStarted(GameObject other, Vector2 dir)
     {
-        Debug.Log(dir + " " + other.transform.tag);
         if(dir == Vector2.down)
         {
             Debug.Log(other.transform.tag);
