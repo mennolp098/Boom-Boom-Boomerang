@@ -45,18 +45,14 @@ public class Enemy : MonoBehaviour
 		_moveSpeed = 0;
 	}
 
-	void OnTouchStarted()
-	{
-		
-	}
 
-	void OnTouchStay()
-	{
+	void OnTouchStay(GameObject other, Vector2 dir)
+    {
 
 	}
 
-	void OnTouchExit()
-	{
+	void OnTouchExit(GameObject other, Vector2 dir)
+    {
 
 	}
 

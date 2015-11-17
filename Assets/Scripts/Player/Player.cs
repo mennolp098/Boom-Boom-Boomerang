@@ -5,16 +5,30 @@ public class Player : MonoBehaviour {
 
     private TouchDetector2D _touchDetector;
 
-    void Start() {
+    void Awake()
+    {
         //adding all the player components
-        gameObject.AddComponent<TouchDetector2D>();
+        _touchDetector = gameObject.AddComponent<TouchDetector2D>();
         gameObject.AddComponent<PlayerInput>();
         gameObject.AddComponent<Movement>();
+    }
 
+    void Start()
+    {
+        //event handlers for touchdetection
         _touchDetector.TouchStarted += OnTouchStarted;
         _touchDetector.OnTouch += OnTouchStay;
         _touchDetector.TouchEnded += OnTouchExit;
 	}
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.transform.GetComponent<GrabAble>())
+        {
+            Destroy(other.gameObject);
+            
+        }
+    }
 
     /// <summary>
     /// Checks in which direction you start to touch a object.
@@ -55,9 +69,11 @@ public class Player : MonoBehaviour {
     /// <summary>
     /// When player dies
     /// </summary>
-	void Death () {
-	
+	void Death ()
+    {
+	    
 	}
+
     /// <summary>
     /// When player gets hit
     /// </summary>

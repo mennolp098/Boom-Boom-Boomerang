@@ -5,7 +5,10 @@ public class Boomerang : ThrowAble {
     public delegate void NormalDelegate();
     public event NormalDelegate DestinationReached;
 
+    private ParticleSystem _particleSystem;
+    private Transform _grabbedObject;
     private GameObject _playerHand;
+    private bool _isMoving = false;
     private bool _returningToHand = false;
     private Vector3 _target = Vector3.zero;
     private float _mass = 50;
@@ -17,6 +20,8 @@ public class Boomerang : ThrowAble {
     {
         _playerHand = GameObject.FindGameObjectWithTag(Tags.PLAYERHAND);
         _playerHand.GetComponent<ThrowingHand>().CatchThrowable(this.gameObject);
+        _particleSystem = GetComponent<ParticleSystem>();
+        _particleSystem.enableEmission = false;
     }
 
     void Update()
@@ -31,6 +36,8 @@ public class Boomerang : ThrowAble {
             MoveTowardsPosition(_playerHand.transform.position);
             RotateAnimation();
         }
+        if (_grabbedObject != null)
+            _grabbedObject.position = this.transform.position;
     }
 
     /// <summary>
@@ -69,6 +76,8 @@ public class Boomerang : ThrowAble {
         _directionMoving = new Vector2(0, 5);
         _target = aimPos;
         DestinationReached += MoveBack;
+        _isMoving = true;
+        _particleSystem.enableEmission = true;
     }
 
     /// <summary>
@@ -89,20 +98,34 @@ public class Boomerang : ThrowAble {
         DestinationReached = null;
         _returningToHand = false;
         _target = Vector3.zero;
+        _isMoving = false;
+        this.transform.position -= new Vector3(0, 0.5f, 0);
+        _particleSystem.enableEmission = false;
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.transform.tag == Tags.ENEMY)
+        if (_isMoving)
         {
-            //TODO: Enemy function
-        }
-        else if(other.transform.tag == Tags.PUZZLEOBJECT)
-        {
-            //TODO: Puzzle function
-        } else if(other.transform.tag != Tags.PLAYER)
-        {
-            StopMoving();
+            if (other.transform.tag == Tags.ENEMY)
+            {
+                //TODO: Enemy function
+            }
+            else if (other.transform.tag != Tags.PLAYER)
+            {
+                if (other.GetComponent<GrabAble>())
+                {
+                    _grabbedObject = other.transform;
+                }
+                else if (other.GetComponent<PuzzleObject>())
+                {
+                    other.GetComponent<PuzzleObject>().Activate();
+                }
+                else
+                {
+                    StopMoving();
+                }
+            }
         }
     }
 }
