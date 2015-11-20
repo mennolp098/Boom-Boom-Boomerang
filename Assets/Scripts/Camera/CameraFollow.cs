@@ -3,10 +3,10 @@ using System.Collections;
 
 public class CameraFollow : MonoBehaviour {
     private Transform _player;
-    private float _maxX = 2;
-    private float _minX = -2;
-    private float _maxY = 2;
-    private float _minY = -2;
+    private float _maxX = 5;
+    private float _minX = -5;
+    private float _maxY = 5;
+    private float _minY = -5;
     void Awake ()
     {
         _player = GameObject.FindGameObjectWithTag(Tags.PLAYER).transform;

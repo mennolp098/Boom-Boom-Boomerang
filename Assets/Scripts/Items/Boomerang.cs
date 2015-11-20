@@ -90,6 +90,7 @@ public class Boomerang : ThrowAble {
         DestinationReached -= MoveBack;
         DestinationReached += StopMoving;
     }
+
     /// <summary>
     /// Stops the movement
     /// </summary>
@@ -107,23 +108,28 @@ public class Boomerang : ThrowAble {
     {
         if (_isMoving)
         {
-            if (other.transform.tag == Tags.ENEMY)
+            if (other.transform.tag == Tags.ENEMY) //if the enemy gets hit by the boomerang
             {
                 //TODO: Enemy function
             }
             else if (other.transform.tag != Tags.PLAYER)
             {
-                if (other.GetComponent<GrabAble>())
+                if (other.GetComponent<GrabAble>()) //if the object touched has the grabable component.
                 {
-                    _grabbedObject = other.transform;
+                    _grabbedObject = other.transform; // grab the object
+                    other.GetComponent<GrabAble>().GrabObject();
                 }
-                else if (other.GetComponent<PuzzleObject>())
+                else if (other.GetComponent<PuzzleObject>() && (other.GetComponent<PuzzleObject>().isActivateAble && other.GetComponent<PuzzleObject>().isBoomerangActivateAble)) //checks if the puzzle is activate able by the boomerang
                 {
                     other.GetComponent<PuzzleObject>().Activate();
                 }
+                else if(other.GetComponent<BreakAbleProp>())
+                {
+                    other.GetComponent<BreakAbleProp>().Break();
+                }
                 else
                 {
-                    StopMoving();
+                    StopMoving(); //stops the boomerang if it touched something different
                 }
             }
         }

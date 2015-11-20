@@ -25,8 +25,8 @@ public class Player : MonoBehaviour {
     {
         if(other.transform.GetComponent<GrabAble>())
         {
+            other.transform.GetComponent<GrabAble>().ObjectCatched();
             Destroy(other.gameObject);
-            
         }
     }
 
