@@ -7,8 +7,8 @@ public class OtherHand : MonoBehaviour {
     private Vector3 _currentAnimPos;
 
     private float _standardY = 0.75f;
-    private float _animTime = 0.25f;
-    private float _animSpeed = 75;
+    private float _animTime = 0.1f;
+    private float _animSpeed = 100;
     private float _currentAnimTime;
 
     private bool _throwing;
@@ -19,16 +19,23 @@ public class OtherHand : MonoBehaviour {
         _player = GameObject.FindGameObjectWithTag(Tags.PLAYER);
         _throwAction.ThrowObjectAction += HandAnim;
     }
+
+    /// <summary>
+    /// Starts animation if item is thrown
+    /// </summary>
+    /// <param name="mousepos"></param>
     void HandAnim(Vector3 mousepos)
     {
         _throwing = true;
         _currentAnimPos = Input.mousePosition;
         _currentAnimTime = Time.time + _animTime;
     }
+
     void Update()
     {
         if (!_throwing)
         {
+            //Rotates the hand in the negative direction of the throwing hand
             Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
             Vector3 dir = Input.mousePosition - pos;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
@@ -44,6 +51,7 @@ public class OtherHand : MonoBehaviour {
         }
         else if(_currentAnimTime > Time.time)
         {
+            //the throw animation
             _currentAnimPos.y -= _animSpeed;
             Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
             Vector3 dir = _currentAnimPos - pos;

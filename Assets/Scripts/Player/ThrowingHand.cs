@@ -7,9 +7,9 @@ public class ThrowingHand : MonoBehaviour {
     private GameObject _throwObject;
     private Vector3 _currentAnimPos;
 
-    private float _animTime = 0.25f;
+    private float _animTime = 0.1f;
     private float _currentAnimTime;
-    private float _animSpeed = 75;
+    private float _animSpeed = 100;
     private float _standardY = 0.75f;
 
     private bool _throwing;
@@ -19,6 +19,10 @@ public class ThrowingHand : MonoBehaviour {
         _player = GameObject.FindGameObjectWithTag(Tags.PLAYER);
         _throwAction.ThrowObjectAction += HandAnim;
     }
+    /// <summary>
+    /// Starts animation if item is thrown
+    /// </summary>
+    /// <param name="mousepos"></param>
     void HandAnim(Vector3 mousepos)
     {
         _throwing = true;
@@ -28,6 +32,7 @@ public class ThrowingHand : MonoBehaviour {
 	void Update () {
         if (!_throwing)
         {
+            //rotates the hand in the direction of the mouse
             Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
             Vector3 dir = Input.mousePosition - pos;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
@@ -45,6 +50,7 @@ public class ThrowingHand : MonoBehaviour {
         }
         else if (_currentAnimTime > Time.time)
         {
+            //the throw animation
             _currentAnimPos.y -= _animSpeed;
 
             Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);

@@ -5,19 +5,27 @@ public class Boomerang : ThrowAble {
     public delegate void NormalDelegate();
     public event NormalDelegate DestinationReached;
 
+    private Color _particleColor = Color.red;
+    private int _colorFase = 0;
     private ParticleSystem _particleSystem;
+
     private Transform _grabbedObject;
     private GameObject _playerHand;
+
     private bool _isMoving = false;
     private bool _returningToHand = false;
+
     private Vector3 _target = Vector3.zero;
+
     private float _mass = 50;
-    private float _speed = 24;
+    private float _speed = 30;
     private float _rotationSpeed = 400;
+
     private Vector2 _directionMoving = new Vector2(0, 1);
 
     void Start()
     {
+        _particleColor.a = 0.5f;
         _playerHand = GameObject.FindGameObjectWithTag(Tags.PLAYERHAND);
         _playerHand.GetComponent<ThrowingHand>().CatchThrowable(this.gameObject);
         _particleSystem = GetComponent<ParticleSystem>();
@@ -30,11 +38,13 @@ public class Boomerang : ThrowAble {
         {
             MoveTowardsPosition(_target); //using the movetowards function to go to the current position it's targeting at.
             RotateAnimation();
+            RotateColor();
         }
         else if(_returningToHand)
         {
             MoveTowardsPosition(_playerHand.transform.position);
             RotateAnimation();
+            RotateColor();
         }
         if (_grabbedObject != null)
             _grabbedObject.position = this.transform.position;
@@ -58,6 +68,78 @@ public class Boomerang : ThrowAble {
         if (Vector3.Distance(this.transform.position, pos) < 1f && DestinationReached != null)
             DestinationReached();
     }
+
+    /// <summary>
+    /// Rotating the particle color
+    /// </summary>
+    void RotateColor()
+    {
+        switch(_colorFase)
+        {
+            case 0:
+                if (_particleColor.g < 1)
+                {
+                    _particleColor.g += 0.01f;
+                }
+                else
+                {
+                    _colorFase++;
+                }
+                break;
+            case 1:
+                if (_particleColor.r > 0)
+                {
+                    _particleColor.r -= 0.01f;
+                }
+                else
+                {
+                    _colorFase++;
+                }
+                break;
+            case 2:
+                if (_particleColor.b < 1)
+                {
+                    _particleColor.b += 0.01f;
+                }
+                else
+                {
+                    _colorFase++;
+                }
+                break;
+            case 3:
+                if (_particleColor.g > 0)
+                {
+                    _particleColor.g -= 0.01f;
+                }
+                else
+                {
+                    _colorFase++;
+                }
+                break;
+            case 4:
+                if (_particleColor.r < 1)
+                {
+                    _particleColor.r += 0.01f;
+                }
+                else
+                {
+                    _colorFase++;
+                }
+                break;
+            case 5:
+                if (_particleColor.b > 0)
+                {
+                    _particleColor.b -= 0.01f;
+                }
+                else
+                {
+                    _colorFase = 0;
+                }
+                break;
+        }
+        _particleSystem.startColor = _particleColor;
+    }
+
 
     /// <summary>
     /// Rotating the boomerang
