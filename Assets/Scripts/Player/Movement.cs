@@ -15,6 +15,7 @@ public class Movement : MonoBehaviour {
 
     void Awake()
     {
+        //getting all the required components
         _rigidbody = GetComponent<Rigidbody2D>();
         _touchDetector = GetComponent<TouchDetector2D>();
         _playerInput = GetComponent<PlayerInput>();
@@ -22,9 +23,12 @@ public class Movement : MonoBehaviour {
 
 	void Start ()
     {
+        //adding touch events
         _touchDetector.TouchStarted += OnTouchStarted;
         _touchDetector.OnTouch += OnTouchStay;
         _touchDetector.TouchEnded += OnTouchExit;
+        
+        //adding keypressed events
         _playerInput.RightKeyPressed += Move;
         _playerInput.LeftKeyPressed += Move;
         _playerInput.JumpKeyPressed += Jump;

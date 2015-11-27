@@ -78,12 +78,21 @@ public class ThrowingHand : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// triggers when a item is catched
+    /// </summary>
+    /// <param name="throwObject"></param>
     public void CatchThrowable(GameObject throwObject)
     {
         _throwObject = throwObject;
         _throwAction.ThrowObjectAction += ThrowObject;
     }
 
+
+    /// <summary>
+    /// throws a throwable object
+    /// </summary>
+    /// <param name="aimPos"></param>
     public void ThrowObject(Vector3 aimPos)
     {
         if (_throwObject != null)
@@ -94,6 +103,10 @@ public class ThrowingHand : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// catching a throwable object
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.transform.tag == Tags.THROWABLE)
