@@ -41,8 +41,7 @@ public class Enemy : MonoBehaviour
 	//Base OntouchStay
 	void OnTouchStay(GameObject other, Vector2 dir)
 	{
-
-<<<<<<< HEAD
+		
 	}
 	//Base onTouchExit
 	void OnTouchExit(GameObject other, Vector2 dir)
@@ -53,17 +52,6 @@ public class Enemy : MonoBehaviour
 	void Idle()
 	{
 		_moveSpeed = 0;
-=======
-
-	void OnTouchStay(GameObject other, Vector2 dir)
-    {
-
-	}
-
-	void OnTouchExit(GameObject other, Vector2 dir)
-    {
-
->>>>>>> d6f62d7b64e6a4f24c7498bbb3dcefbea931b5d7
 	}
 
 	//If a enemy dies it will be send back to the Objectpool.
