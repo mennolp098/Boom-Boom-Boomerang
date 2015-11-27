@@ -84,7 +84,6 @@ public class Movement : MonoBehaviour {
     {
         if(dir == Vector2.down)
         {
-            Debug.Log(other.transform.tag);
             if (other.transform.tag == Tags.GROUND)
             {
                 _onGround = true;
