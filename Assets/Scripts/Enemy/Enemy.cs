@@ -3,13 +3,17 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour 
 {
-	public int _moveSpeed =1;
-	private TouchDetector2D _touchDetector;
-	protected ObjectPool _objectPool;
+	public int moveSpeed =1;
 
+    protected ObjectPool _objectPool;
+    protected int _dropAmount = 5;
 
+    private TouchDetector2D _touchDetector;
+    private bool _isHit;
+    private float _currentRecoverTime;
+    private float _recoverTime = 2;
 
-	void Awake()
+    void Awake()
 	{
 		_touchDetector = gameObject.AddComponent<TouchDetector2D>();
 
@@ -23,59 +27,86 @@ public class Enemy : MonoBehaviour
 	//Overridable Update
 	public virtual void Update()
 	{
-		Move ();
+        if (!_isHit)
+        {
+            Move();
+        }
+        else
+        {
+            CheckRecoverHit();
+        }
 	}
 
 
-	//if the player hits the enemy on the head
+	//if the enemy hits the player from the left, right and down side
 	public virtual void OnTouchStarted(GameObject other, Vector2 dir)
 	{
-		if (dir == Vector2.down) 
-		{
-			if(other.transform.tag == Tags.PLAYER)
-			{
-				Death();
-			}
-		}
+        if(dir == Vector2.left || dir == Vector2.right || dir == Vector2.down)
+        {
+            if(other.transform.tag == Tags.PLAYER)
+            {
+                other.GetComponent<Player>().GetHit();
+            }
+        }
 	}
 	//Base OntouchStay
 	void OnTouchStay(GameObject other, Vector2 dir)
 	{
 
-<<<<<<< HEAD
 	}
 	//Base onTouchExit
 	void OnTouchExit(GameObject other, Vector2 dir)
 	{
 
 	}
-	//Base Enemy Idle
-	void Idle()
-	{
-		_moveSpeed = 0;
-=======
-
-	void OnTouchStay(GameObject other, Vector2 dir)
+    //Base Enemy Idle
+    void Idle()
     {
+        moveSpeed = 0;
+    }
 
-	}
-
-	void OnTouchExit(GameObject other, Vector2 dir)
+    //if a enemy gets hit reset recover time
+    public virtual void GetHit()
     {
+        if(!_isHit)
+        {
+            _isHit = true;
+            _currentRecoverTime = Time.time + _recoverTime;
+        }
+    }
 
->>>>>>> d6f62d7b64e6a4f24c7498bbb3dcefbea931b5d7
-	}
+    //checks if this enemy can recover from being hit.
+    private void CheckRecoverHit()
+    {
+        if (_currentRecoverTime < Time.time)
+        {
+            _isHit = false;
+        }
+    }
 
 	//If a enemy dies it will be send back to the Objectpool.
 	//Overridable death
 	public virtual void Death()
 	{
-		//_deathParticle.transform = this.gameObject.transform;
-		_objectPool.PoolObject (this.gameObject);
-	}
+        //_deathParticle.transform = this.gameObject.transform;
+        DropCoins(_dropAmount);
+        _objectPool.PoolObject (this.gameObject);
+    }
 
 	//Overridable enemy movement
 	public virtual void Move()
 	{
 	}
+
+    public void DropCoins(int dropAmount)
+    {
+        for (int i = 0; i < dropAmount; i++)
+        {
+            GameObject newCoin = _objectPool.GetObjectForType("Coin", false) as GameObject;
+            newCoin.transform.position = this.transform.position + new Vector3(0,1,0);
+            Rigidbody2D coinRigidbody = newCoin.GetComponent<Rigidbody2D>();
+            coinRigidbody.gravityScale = 1;
+            coinRigidbody.velocity += new Vector2(Random.Range(-10, 10), Random.Range(0, 10));
+        }
+    }
 }

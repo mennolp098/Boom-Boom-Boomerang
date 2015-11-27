@@ -190,11 +190,8 @@ public class Boomerang : ThrowAble {
     {
         if (_isMoving)
         {
-            if (other.transform.tag == Tags.ENEMY) //if the enemy gets hit by the boomerang
-            {
-                //TODO: Enemy function
-            }
-            else if (other.transform.tag != Tags.PLAYER)
+            
+            if (other.transform.tag != Tags.PLAYER)
             {
                 if (other.GetComponent<GrabAble>()) //if the object touched has the grabable component.
                 {
@@ -208,6 +205,10 @@ public class Boomerang : ThrowAble {
                 else if(other.GetComponent<BreakAbleProp>())
                 {
                     other.GetComponent<BreakAbleProp>().Break();
+                }
+                else if (other.transform.tag == Tags.ENEMY) //if the enemy gets hit by the boomerang
+                {
+                    other.GetComponent<Enemy>().GetHit();
                 }
                 else
                 {

@@ -40,7 +40,7 @@ public class EnemyRed : Enemy
 		{
 			this.transform.Translate (Vector2.down * 0 * Time.deltaTime);
 		}
-		transform.Translate (Vector2.right * _moveDirection * _moveSpeed * Time.deltaTime);
+		transform.Translate (Vector2.right * _moveDirection * moveSpeed * Time.deltaTime);
 	}
 	
 	public override void Death()
@@ -53,15 +53,22 @@ public class EnemyRed : Enemy
 	{
 		base.OnTouchStarted(other, dir);
 
-		if (other.transform.tag == Tags.PLATFORM) 
-		{
-			//Getting the collider size of the touched platform
-			Collider2D collidedObject = other.GetComponent<Collider2D>();
-			float platformWidth = collidedObject.bounds.size.x;
+        if (dir == Vector2.down)
+        {
+            if (other.transform.tag == Tags.PLATFORM)
+            {
+                //Getting the collider size of the touched platform
+                Collider2D collidedObject = other.GetComponent<Collider2D>();
+                float platformWidth = collidedObject.bounds.size.x;
 
-			_platformWidth = platformWidth;
-			_platformTransform = other.transform;
-		}
-
+                _platformWidth = platformWidth;
+                _platformTransform = other.transform;
+            }
+        }
+        if(dir == Vector2.right || dir == Vector2.left)
+        {
+            if (other.transform.tag != Tags.PLAYER)
+                _moveDirection *= -1;
+        }
 	}
 }
