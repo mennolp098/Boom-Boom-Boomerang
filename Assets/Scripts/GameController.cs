@@ -6,9 +6,11 @@ public class GameController : MonoBehaviour {
     public event NormalDelegate OnGamePaused;
     public event NormalDelegate OnGameResumed;
     public event NormalDelegate OnScoreUpdated;
+    public event NormalDelegate OnLivesUpdated;
 
-    private float _score;
-    private float _lives = 3;
+    private int _score;
+    private int _lives = 3;
+    private int _level = 0;
 
     private GameObject _player;
 
@@ -54,6 +56,7 @@ public class GameController : MonoBehaviour {
     private void RespawnPlayer()
     {
         _player.transform.position = _checkpointPosition;
+        _player.GetComponent<Movement>().enabled = true;
         //TODO: unpause movement
     }
 
@@ -65,21 +68,9 @@ public class GameController : MonoBehaviour {
     {
         _checkpointPosition = pos;
     }
-
-    public float score
-    {
-        get
-        {
-            return _score;
-        }
-        set
-        {
-            _score = value;
-            if (OnScoreUpdated != null)
-                OnScoreUpdated();
-        }
-    }
-
+    /// <summary>
+    /// Pauses or Resumes the game
+    /// </summary>
     public void PauseOrResume()
     {
         if(!_paused)
@@ -93,6 +84,67 @@ public class GameController : MonoBehaviour {
             _paused = false;
             if (OnGameResumed != null)
                 OnGameResumed();
+        }
+    }
+
+    /// <summary>
+    /// Public int score to set and get the _score value, this also triggers a update event
+    /// </summary>
+    public int score
+    {
+        get
+        {
+            return _score;
+        }
+        set
+        {
+            _score = value;
+            if (OnScoreUpdated != null)
+                OnScoreUpdated();
+        }
+    }
+
+    /// <summary>
+    /// Public vector3 checkpointPosition to set and get the _checkpointPosition value
+    /// </summary>
+    public Vector3 checkpointPosition
+    {
+        get
+        {
+            return _checkpointPosition;
+        }
+        set
+        {
+            _checkpointPosition = value;
+        }
+    }
+
+    public int level
+    {
+        get
+        {
+            return _level;
+        }
+        set
+        {
+            _level = value;
+        }
+    }
+
+    /// <summary>
+    /// Public int lives to set and get the _lives value, this also triggers a update event
+    /// </summary>
+    public int lives
+    {
+        get
+        {
+            return _lives;
+        }
+        set
+        {
+            _lives = value;
+            if (OnLivesUpdated != null)
+                OnLivesUpdated();
         }
     }
 }

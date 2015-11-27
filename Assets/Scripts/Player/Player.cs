@@ -9,8 +9,8 @@ public class Player : MonoBehaviour {
     public delegate void Vector3Delegate(Vector3 value);
     public event Vector3Delegate OnCheckpointTouched;
 
-
     private TouchDetector2D _touchDetector;
+    private ObjectPool _objectPool;
 
     void Awake()
     {
@@ -18,6 +18,9 @@ public class Player : MonoBehaviour {
         _touchDetector = gameObject.AddComponent<TouchDetector2D>();
         gameObject.AddComponent<PlayerInput>();
         gameObject.AddComponent<Movement>();
+
+        //getting components
+        _objectPool = GameObject.FindGameObjectWithTag(Tags.GAMECONTROLLER).GetComponent<ObjectPool>();
     }
 
     void Start()
@@ -28,13 +31,16 @@ public class Player : MonoBehaviour {
         _touchDetector.TouchEnded += OnTouchExit;
 	}
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnCollisionEnter2D(Collision2D other)
     {
         //checks if you can grab a object
         if(other.transform.GetComponent<GrabAble>())
         {
+
             other.transform.GetComponent<GrabAble>().ObjectCatched();
-            Destroy(other.gameObject);
+            _objectPool.PoolObject(other.gameObject);
+            if (other.gameObject.activeInHierarchy)
+                Destroy(other.gameObject);
         }
     }
 
@@ -49,7 +55,7 @@ public class Player : MonoBehaviour {
         {
             if(other.transform.tag == Tags.ENEMY)
             {
-                ///other.GetComponent<Enemy>().GetHit();
+                other.GetComponent<Enemy>().Death();
             }
             if(other.transform.tag == Tags.CHECKPOINT)
             {
@@ -91,10 +97,11 @@ public class Player : MonoBehaviour {
     /// <summary>
     /// When player gets hit
     /// </summary>
-    void GetHit()
+   public void GetHit()
     {
         //pause movement until death anim is done
         //TODO: start anim + check anim playtime
+        GetComponent<Movement>().enabled = false;
         Invoke("Death", 0.5f);
     }
 }
