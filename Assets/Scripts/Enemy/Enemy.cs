@@ -4,31 +4,31 @@ using System.Collections;
 public class Enemy : MonoBehaviour 
 {
 	public int _moveSpeed =1;
+	private TouchDetector2D _touchDetector;
+	protected ObjectPool _objectPool;
 
-	private TouchDetector2D _touchDetectorEnemy;
 
 
-	void Start()
+	void Awake()
 	{
-		_touchDetectorEnemy = GetComponent<TouchDetector2D>();
+		_touchDetector = gameObject.AddComponent<TouchDetector2D>();
 
-		_touchDetectorEnemy.TouchStarted += OnTouchStarted;
-		_touchDetectorEnemy.OnTouch += OnTouchStay;
-		_touchDetectorEnemy.TouchEnded += OnTouchExit;
+		_touchDetector.TouchStarted += OnTouchStarted;
+		_touchDetector.OnTouch += OnTouchStay;
+		_touchDetector.TouchEnded += OnTouchExit;
+
+		_objectPool = GameObject.FindGameObjectWithTag(Tags.GAMECONTROLLER).GetComponent<ObjectPool>();
 	}
 	
-	
+	//Overridable Update
 	public virtual void Update()
 	{
 		Move ();
 	}
 
-	//Overridable enemy movement
-	public virtual void Move()
-	{
-	}
-	
-	void OnTouchStarted(GameObject other, Vector2 dir)
+
+	//if the player hits the enemy on the head
+	public virtual void OnTouchStarted(GameObject other, Vector2 dir)
 	{
 		if (dir == Vector2.down) 
 		{
@@ -37,32 +37,33 @@ public class Enemy : MonoBehaviour
 				Death();
 			}
 		}
+	}
+	//Base OntouchStay
+	void OnTouchStay(GameObject other, Vector2 dir)
+	{
 
 	}
+	//Base onTouchExit
+	void OnTouchExit(GameObject other, Vector2 dir)
+	{
 
+	}
+	//Base Enemy Idle
 	void Idle()
 	{
 		_moveSpeed = 0;
 	}
 
-	void OnTouchStarted()
+	//If a enemy dies it will be send back to the Objectpool.
+	//Overridable death
+	public virtual void Death()
 	{
-		
+		//_deathParticle.transform = this.gameObject.transform;
+		_objectPool.PoolObject (this.gameObject);
 	}
 
-	void OnTouchStay()
+	//Overridable enemy movement
+	public virtual void Move()
 	{
-
-	}
-
-	void OnTouchExit()
-	{
-
-	}
-
-
-	void Death()
-	{
-
 	}
 }

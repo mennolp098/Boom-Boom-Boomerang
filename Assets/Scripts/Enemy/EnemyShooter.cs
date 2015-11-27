@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyShooter : Enemy {
-
-	// Use this for initialization
-	void Start () {
-	
+public class EnemyShooter : Enemy 
+{
+	public override void Update()
+	{
+		base.Update ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	public override void Move()
+	{
+		base.Move ();
 	}
 
 
