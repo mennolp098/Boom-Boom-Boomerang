@@ -3,6 +3,13 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
+    public delegate void NormalDelegate();
+    public event NormalDelegate OnDeath;
+
+    public delegate void Vector3Delegate(Vector3 value);
+    public event Vector3Delegate OnCheckpointTouched;
+
+
     private TouchDetector2D _touchDetector;
 
     void Awake()
@@ -21,8 +28,9 @@ public class Player : MonoBehaviour {
         _touchDetector.TouchEnded += OnTouchExit;
 	}
 
-    void OnCollisionEnter2D(Collision2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
+        //checks if you can grab a object
         if(other.transform.GetComponent<GrabAble>())
         {
             other.transform.GetComponent<GrabAble>().ObjectCatched();
@@ -42,6 +50,11 @@ public class Player : MonoBehaviour {
             if(other.transform.tag == Tags.ENEMY)
             {
                 ///other.GetComponent<Enemy>().GetHit();
+            }
+            if(other.transform.tag == Tags.CHECKPOINT)
+            {
+                if (OnCheckpointTouched != null)
+                    OnCheckpointTouched(other.transform.position);
             }
         }
     }
@@ -67,11 +80,12 @@ public class Player : MonoBehaviour {
     }
 
     /// <summary>
-    /// When player dies
+    /// Player death function
     /// </summary>
 	void Death ()
     {
-	    
+        if (OnDeath != null)
+            OnDeath();
 	}
 
     /// <summary>
@@ -79,6 +93,8 @@ public class Player : MonoBehaviour {
     /// </summary>
     void GetHit()
     {
-        Death();
+        //pause movement until death anim is done
+        //TODO: start anim + check anim playtime
+        Invoke("Death", 0.5f);
     }
 }

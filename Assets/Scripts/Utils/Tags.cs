@@ -10,4 +10,5 @@ public class Tags : MonoBehaviour {
     public const string ENEMY = "Enemy";
     public const string PUZZLEOBJECT = "PuzzleObject";
     public const string COIN = "Coin";
+    public const string CHECKPOINT = "CheckPoint";
 }
