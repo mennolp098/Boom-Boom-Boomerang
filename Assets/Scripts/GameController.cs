@@ -18,6 +18,20 @@ public class GameController : MonoBehaviour {
 
     private bool _paused;
 
+    public static GameController Instance;
+
+    void Awake()
+    {
+        if (Instance)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+            Instance = this;
+        }
+    }
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag(Tags.PLAYER);
