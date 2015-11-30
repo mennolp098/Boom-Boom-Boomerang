@@ -40,7 +40,7 @@ public class EnemyRed : Enemy
 		{
 			this.transform.Translate (Vector2.down * 0 * Time.deltaTime);
 		}
-		transform.Translate (Vector2.right * _moveDirection * moveSpeed * Time.deltaTime);
+		transform.Translate (Vector2.right * _moveDirection * _moveSpeed * Time.deltaTime);
 	}
 	
 	public override void Death()

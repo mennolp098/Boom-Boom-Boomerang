@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour 
 {
-	public int moveSpeed =1;
+	protected float _moveSpeed =1;
 
     protected ObjectPool _objectPool;
     protected int _dropAmount = 5;

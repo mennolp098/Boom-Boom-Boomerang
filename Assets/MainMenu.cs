@@ -35,7 +35,9 @@ public class MainMenu : MonoBehaviour
 	//loads the selected savegame
 	public void SaveSelected()
 	{
-
+		//Put selected save here
+		_saveSelectPanel.SetActive (false);
+		_mainMenuPanel.SetActive (true);
 	}
 	//Delete warning popup before you delete your character
 	public void DeleteSaveClicked()

@@ -16,7 +16,7 @@ public class EnemyGreen : Enemy
 	public override void Move ()
 	{
 		base.Move ();
-		transform.Translate (Vector2.left * moveSpeed * Time.deltaTime);
+		transform.Translate (Vector2.left * _moveSpeed * Time.deltaTime);
 	}
 
 	//Green Enemy specific death function
