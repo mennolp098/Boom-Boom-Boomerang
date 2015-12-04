@@ -4,7 +4,10 @@ using System.Collections;
 public class Player : MonoBehaviour {
 
     public delegate void NormalDelegate();
+    public delegate void IntDelegate(int value);
     public event NormalDelegate OnDeath;
+    public event NormalDelegate OnWin;
+    public event IntDelegate OnGoldCoinCatched;
 
     public delegate void Vector3Delegate(Vector3 value);
     public event Vector3Delegate OnCheckpointTouched;
@@ -30,17 +33,38 @@ public class Player : MonoBehaviour {
         _touchDetector.OnTouch += OnTouchStay;
         _touchDetector.TouchEnded += OnTouchExit;
 	}
-
     void OnCollisionEnter2D(Collision2D other)
     {
         //checks if you can grab a object
-        if(other.transform.GetComponent<GrabAble>())
+        if (other.transform.GetComponent<GrabAble>())
         {
+            if (other.transform.tag == Tags.GOLDCOIN && OnGoldCoinCatched != null)
+                OnGoldCoinCatched(other.transform.GetComponent<GoldCoin>().goldCoinIndex);
 
-            other.transform.GetComponent<GrabAble>().ObjectCatched();
-            _objectPool.PoolObject(other.gameObject);
+            other.transform.GetComponent<GrabAble>().ObjectCatched(); //fire the function from the grabable object
+            _objectPool.PoolObject(other.gameObject); //pool the object
+
+            //if the object is not pooled then delete it
             if (other.gameObject.activeInHierarchy)
                 Destroy(other.gameObject);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        //checks if it is a puzzle object
+        if(other.transform.tag == Tags.PUZZLEOBJECT)
+        {
+            if(other.transform.GetComponent<PuzzleObject>().isActivateAble)
+            {
+                other.transform.GetComponent<PuzzleObject>().Activate();
+            }
+        }
+        //if you hit the endpoint then send the message onwin
+        if (other.transform.tag == Tags.ENDPOINT)
+        {
+            if (OnWin != null)
+                OnWin();
         }
     }
 

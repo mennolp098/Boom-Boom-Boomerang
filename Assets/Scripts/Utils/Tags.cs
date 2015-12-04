@@ -13,4 +13,7 @@ public class Tags : MonoBehaviour {
 	public const string COIN = 				"Coin";
 	public const string CHECKPOINT = 		"Checkpoint";
 	public const string UIOBJECT = 			"Uiobject";
+    public const string ENDPOINT =          "EndPoint";
+    public const string FADESCREEN =        "FadeScreen";
+    public const string GOLDCOIN =          "GoldCoin";
 }

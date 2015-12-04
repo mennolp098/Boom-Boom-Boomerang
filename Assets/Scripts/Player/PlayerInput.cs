@@ -23,14 +23,14 @@ public class PlayerInput : MonoBehaviour {
         bool aKeyIsPressed = false;
 
         //The right and left arrow may be send more then once
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
             //send right event
             aKeyIsPressed = true;
             if (RightKeyPressed != null)
                 RightKeyPressed(1); //Right is always positive
         }
-        else if (Input.GetKey(KeyCode.LeftArrow))
+        else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
             //send left event
             aKeyIsPressed = true;
@@ -39,7 +39,7 @@ public class PlayerInput : MonoBehaviour {
         }
 
         //The up and mouse button only need to send once
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
             //send up event
             if (JumpKeyPressed != null)

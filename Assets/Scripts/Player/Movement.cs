@@ -4,10 +4,13 @@ using System.Collections;
 public class Movement : MonoBehaviour {
     private bool _onGround = false;
     private bool _hasDoubleJumped = false;
+    private bool _autoMove = false;
 
     private float _dampSpeed = 0f;
     private float _speed = 5f;
-    private float _jumpForce = 5f;
+    private float _jumpForce = 10f;
+    private int _touchingDir = 0;
+    private int _autoMoveDir = 1;
 
     private Rigidbody2D _rigidbody;
     private TouchDetector2D _touchDetector;
@@ -32,17 +35,35 @@ public class Movement : MonoBehaviour {
         _playerInput.RightKeyPressed += Move;
         _playerInput.LeftKeyPressed += Move;
         _playerInput.JumpKeyPressed += Jump;
+
+        GetComponent<Player>().OnWin += OnLevelCompleted;
 	}
+
+    private void OnLevelCompleted()
+    {
+        _autoMove = true;
+        _playerInput.RightKeyPressed -= Move;
+        _playerInput.LeftKeyPressed -= Move;
+        _playerInput.JumpKeyPressed -= Jump;
+    }
 
 	private void Update()
     {
-        //Using dampspeed so the character will run smoothly and stop smoothly
-        if (_dampSpeed > 0)
+        if (!GameController.Instance.isPaused)
         {
-            _dampSpeed -= 0.085f;
-            if (_dampSpeed < 0)
+            //Using dampspeed so the character will run smoothly and stop smoothly
+            if (_dampSpeed > 0)
             {
-                _dampSpeed = 0;
+                _dampSpeed -= 0.085f;
+                if (_dampSpeed < 0)
+                {
+                    _dampSpeed = 0;
+                }
+            }
+            //auto move to right
+            if (_autoMove)
+            {
+                Move(_autoMoveDir);
             }
         }
     }
@@ -53,14 +74,20 @@ public class Movement : MonoBehaviour {
     /// <param name="dir"></param>
 	private void Move (int dir)
     {
-        if (_dampSpeed < _speed)
+        if (!GameController.Instance.isPaused)
         {
-            _dampSpeed += 0.5f;
+            if (dir != _touchingDir)
+            {
+                if (_dampSpeed < _speed)
+                {
+                    _dampSpeed += 0.5f;
+                }
+                Vector3 movement = new Vector3(1, 0, 0);
+                movement.x *= dir;
+                _rigidbody.transform.position += movement * _dampSpeed * Time.deltaTime;
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * dir, transform.localScale.y, transform.localScale.z);
+            }
         }
-        Vector3 movement = new Vector3(1, 0, 0);
-        movement.x *= dir;
-        _rigidbody.transform.position += movement * _dampSpeed * Time.deltaTime;
-        transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * dir, transform.localScale.y, transform.localScale.z);
     }
 
     /// <summary>
@@ -68,14 +95,17 @@ public class Movement : MonoBehaviour {
     /// </summary>
     private void Jump()
     {
-        if (_onGround)
+        if (!GameController.Instance.isPaused)
         {
-            _rigidbody.velocity += new Vector2(0, _jumpForce);
-        }
-        else if(!_hasDoubleJumped)
-        {
-            _rigidbody.velocity += new Vector2(0, _jumpForce / 1.25f);
-            _hasDoubleJumped = true;
+            if (_onGround)
+            {
+                _rigidbody.velocity += new Vector2(0, _jumpForce);
+            }
+            else if (!_hasDoubleJumped)
+            {
+                _rigidbody.velocity += new Vector2(0, _jumpForce / 2f);
+                _hasDoubleJumped = true;
+            }
         }
     }
 
@@ -94,6 +124,20 @@ public class Movement : MonoBehaviour {
                 _hasDoubleJumped = false;
             }
         }
+        if (dir == Vector2.left)
+        {
+            if (other.transform.tag != Tags.PLAYER && other.transform.tag != Tags.THROWABLE && other.transform.tag != Tags.PLAYERHAND && other.transform.tag != Tags.PUZZLEOBJECT)
+            {
+                _touchingDir = -1;
+            }
+        }
+        if (dir == Vector2.right)
+        {
+            if (other.transform.tag != Tags.PLAYER && other.transform.tag != Tags.THROWABLE && other.transform.tag != Tags.PLAYERHAND && other.transform.tag != Tags.PUZZLEOBJECT)
+            {
+                _touchingDir = 1;
+            }
+        }
     }
 
     /// <summary>
@@ -110,6 +154,13 @@ public class Movement : MonoBehaviour {
                 _onGround = false;
             }
         }
+        if (dir == Vector2.left || dir == Vector2.right)
+        {
+            if (other.transform.tag != Tags.PLAYER && other.transform.tag != Tags.THROWABLE && other.transform.tag != Tags.PLAYERHAND && other.transform.tag != Tags.PUZZLEOBJECT)
+            {
+                _touchingDir = 0;
+            }
+        }
     }
 
     /// <summary>
@@ -119,6 +170,5 @@ public class Movement : MonoBehaviour {
     /// <param name="dir"></param>
     private void OnTouchStay(GameObject other, Vector2 dir)
     {
-
     }
 }

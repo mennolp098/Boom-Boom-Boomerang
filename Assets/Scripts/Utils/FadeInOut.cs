@@ -26,7 +26,10 @@ public class FadeInOut : MonoBehaviour {
 			returnAlpha = GetComponent<SpriteRenderer>().color.a;
 		}else if(GetComponent<CanvasRenderer>() != null){
 			returnAlpha = GetComponent<CanvasRenderer>().GetColor().a;
-		}
+		} else if(GetComponent<Image>() != null)
+        {
+            returnAlpha = GetComponent<Image>().color.a;
+        }
 		return returnAlpha;
 	}
 
@@ -63,7 +66,26 @@ public class FadeInOut : MonoBehaviour {
 				}
 			}
 		}
-	}
+        else if (GetComponent<Image>() != null)
+        {
+            color = GetComponent<Image>().color;
+            color.a = alphaValue;
+            GetComponent<Image>().color = color;
+            if (childerenInc)
+            {
+                for (int i = 0; i < gameObject.transform.childCount; i++)
+                {
+                    GameObject Go = gameObject.transform.GetChild(i).gameObject;
+                    if (Go.GetComponent<Image>() != null)
+                    {
+                        color = Go.GetComponent<Image>().color;
+                        color.a = alphaValue;
+                        Go.GetComponent<Image>().color = color;
+                    }
+                }
+            }
+        }
+    }
 
 	public void Fade(float fadeToValue,float fadeSpeed = 0.005f){
 		_fadeTargetValue = fadeToValue;

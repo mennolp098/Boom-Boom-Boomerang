@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameController : MonoBehaviour {
     public delegate void NormalDelegate();
@@ -11,12 +12,16 @@ public class GameController : MonoBehaviour {
     private int _score;
     private int _lives = 3;
     private int _level = 0;
+    private Dictionary<int, bool[]> _levelGoldCoinsCollected = new Dictionary<int, bool[]>();
 
     private GameObject _player;
+
+    private GameObject _fadeScreen;
 
     private Vector3 _checkpointPosition;
 
     private bool _paused;
+    private bool _gameEnded;
 
     public static GameController Instance;
 
@@ -32,12 +37,46 @@ public class GameController : MonoBehaviour {
             Instance = this;
         }
     }
-    void Start()
+
+    void OnLevelWasLoaded(int level)
+    {
+        if (level > 0)
+            StartGame();
+    }
+
+    void StartGame()
     {
         _player = GameObject.FindGameObjectWithTag(Tags.PLAYER);
         Player currentPlayerScript = _player.GetComponent<Player>();
         currentPlayerScript.OnDeath += PlayerDeath;
+        currentPlayerScript.OnWin += LevelCompleted;
         currentPlayerScript.OnCheckpointTouched += SetCheckPointPosition;
+        currentPlayerScript.OnGoldCoinCatched += GetGoldCoin;
+
+        _fadeScreen = GameObject.FindGameObjectWithTag(Tags.FADESCREEN);
+    }
+
+    /// <summary>
+    /// Triggers when the level has been completed
+    /// </summary>
+    private void LevelCompleted()
+    {
+        //Fade the black screen to alpha 1
+        _fadeScreen.GetComponent<FadeInOut>().Fade(1);
+        _fadeScreen.GetComponent<FadeInOut>().OnFadeEnd += ShowWinScreen;
+    }
+
+    private void ShowWinScreen(float fadeValue = 0)
+    {
+        PauseOrResume();
+        _gameEnded = true;
+
+        //TODO: show win screen
+    }
+
+    private void GetGoldCoin(int index)
+    {
+        _levelGoldCoinsCollected[_level][index] = true;
     }
 
     /// <summary>
@@ -87,17 +126,28 @@ public class GameController : MonoBehaviour {
     /// </summary>
     public void PauseOrResume()
     {
-        if(!_paused)
+        if (!_gameEnded)
         {
-            _paused = true;
-            if (OnGamePaused != null)
-                OnGamePaused();
+            if (!_paused)
+            {
+                _paused = true;
+                if (OnGamePaused != null)
+                    OnGamePaused();
+            }
+            else
+            {
+                _paused = false;
+                if (OnGameResumed != null)
+                    OnGameResumed();
+            }
         }
-        else
+    }
+
+    public bool isPaused
+    {
+        get
         {
-            _paused = false;
-            if (OnGameResumed != null)
-                OnGameResumed();
+            return _paused;
         }
     }
 
@@ -159,6 +209,17 @@ public class GameController : MonoBehaviour {
             _lives = value;
             if (OnLivesUpdated != null)
                 OnLivesUpdated();
+        }
+    }
+    public Dictionary<int, bool[]> goldCoins
+    {
+        get
+        {
+            return _levelGoldCoinsCollected;
+        }
+        set
+        {
+            _levelGoldCoinsCollected = value;
         }
     }
 }
