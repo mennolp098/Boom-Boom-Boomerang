@@ -28,8 +28,7 @@ public class Door : PuzzleObject {
     {
         if(_activated)
         {
-            //If the door is activated then move towards the move object.
-            Debug.Log("derp");
+            //If the door is activated then moves towards the move object.
             this.transform.position = Vector3.Lerp(this.transform.position, _movePosition, _moveSpeed * Time.deltaTime);
         }
     }

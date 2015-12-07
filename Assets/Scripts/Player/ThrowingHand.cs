@@ -7,6 +7,9 @@ public class ThrowingHand : MonoBehaviour {
     private GameObject _throwObject;
     private Vector3 _currentAnimPos;
 
+    private float _catchCooldown = 1;
+    private float _currentCatchCooldown;
+
     private float _animTime = 0.1f;
     private float _currentAnimTime;
     private float _animSpeed = 100;
@@ -84,8 +87,11 @@ public class ThrowingHand : MonoBehaviour {
     /// <param name="throwObject"></param>
     public void CatchThrowable(GameObject throwObject)
     {
-        _throwObject = throwObject;
-        _throwAction.ThrowObjectAction += ThrowObject;
+        if (_currentCatchCooldown <= Time.time)
+        {
+            _throwObject = throwObject;
+            _throwAction.ThrowObjectAction += ThrowObject;
+        }
     }
 
 
@@ -100,6 +106,7 @@ public class ThrowingHand : MonoBehaviour {
             _throwAction.ThrowObjectAction -= ThrowObject;
             _throwObject.GetComponent<ThrowAble>().Throw(aimPos);
             _throwObject = null;
+            _currentCatchCooldown = Time.time + _catchCooldown;
         }
     }
 

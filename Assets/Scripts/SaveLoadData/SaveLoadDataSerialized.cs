@@ -50,6 +50,7 @@ public class SaveLoadDataSerialized : MonoBehaviour {
         saveData.score = _gameController.score;
         saveData.checkpointPosition = _gameController.checkpointPosition;
         saveData.level = _gameController.level;
+        saveData.goldCoins = _gameController.goldCoins;
 
         //serializing save data and closing the file
 		binaryFormatter.Serialize(file,saveData);
@@ -77,6 +78,7 @@ public class SaveLoadDataSerialized : MonoBehaviour {
             _gameController.lives = saveData.lives;
             _gameController.checkpointPosition = saveData.checkpointPosition;
             _gameController.score = saveData.score;
+            _gameController.goldCoins = saveData.goldCoins;
 
             //closing the file after every value is set
 			file.Close();
@@ -97,7 +99,7 @@ public class SaveData
 {
 	public int lives;
     public int score;
-    public Dictionary<int, List<bool>> goldCoins;
+    public Dictionary<int, bool[]> goldCoins;
     public Vector3 checkpointPosition;
     public int level;
 }
