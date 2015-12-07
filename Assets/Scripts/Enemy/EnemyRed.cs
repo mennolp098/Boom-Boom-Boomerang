@@ -7,11 +7,6 @@ public class EnemyRed : Enemy
 	private float _platformWidth;
 	private Transform _platformTransform;
 
-	private void Start()
-	{ 
-
-	}
-
 	public override void Update()
 	{
 		base.Update();
@@ -24,7 +19,6 @@ public class EnemyRed : Enemy
 
 		if (_platformTransform != null)
 		{
-			Debug.Log(this.transform.position.x + " " + (_platformTransform.transform.position.x - _platformWidth/2 - 0.5f));
 			if(this.transform.position.x < _platformTransform.transform.position.x - _platformWidth/2 + 0.5f)
 			{
 				Debug.Log("Right");
@@ -42,7 +36,7 @@ public class EnemyRed : Enemy
 		}
 		transform.Translate (Vector2.right * _moveDirection * _moveSpeed * Time.deltaTime);
 	}
-	
+	//Death
 	public override void Death()
 	{
 		base.Death ();	

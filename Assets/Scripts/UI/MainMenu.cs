@@ -9,26 +9,32 @@ public class MainMenu : MonoBehaviour
 	private GameObject _mainMenuPanel;
 	private GameObject _deleteWarningPanel;
 
+	private GameObject _deleteButtonY;
+	private GameObject _deleteButtonN;
+
 	private bool _deleteBool;
 
 	public Text _saveGameText1;
 	public Text _saveGameText2;
 	public Text _saveGameText3;
-
-	private Dictionary<int, string> load = new Dictionary<int, string>();
+	
 
 	void Awake()
 	{
 		_saveSelectPanel = GameObject.Find ("SaveSelectPanel");
 		_mainMenuPanel = GameObject.Find ("MainMenuPanel");
 		_deleteWarningPanel = GameObject.Find ("DeleteWarningPanel");
+
+		_deleteButtonY = GameObject.Find ("DeleteYes");
+		_deleteButtonN = GameObject.Find ("DeleteNo");
+
+
 	}
 
 	void Start ()
 	{
-	
-
-		//_saveSelectPanel.SetActive (false);
+		_saveSelectPanel.SetActive (true);
+		_mainMenuPanel.SetActive (false);
 		_deleteWarningPanel.SetActive (false);
 	}
 
@@ -36,18 +42,21 @@ public class MainMenu : MonoBehaviour
 	public void SaveSelected()
 	{
 		//Put selected save here
-		_saveSelectPanel.SetActive (false);
-		_mainMenuPanel.SetActive (true);
+		_saveSelectPanel.SetActive (true);
+		_mainMenuPanel.SetActive (false);
 	}
 	//Delete warning popup before you delete your character
 	public void DeleteSaveClicked()
 	{
+		Debug.Log ("Delete Clicked");
 		_deleteWarningPanel.SetActive (true);
 
-		if (_deleteBool == false) {
-			return;
-		} else if (_deleteBool == true) {
+		if (_deleteBool == false && _deleteButtonN) 
+		{
+			_deleteWarningPanel.SetActive (false);
+		} else if (_deleteBool == true && _deleteButtonY) {
 			//delete save here
+			Debug.Log("Save Deleted");
 		}
 		
 	}
