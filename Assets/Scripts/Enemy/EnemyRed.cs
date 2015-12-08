@@ -19,20 +19,19 @@ public class EnemyRed : Enemy
 
 		if (_platformTransform != null)
 		{
-			if(this.transform.position.x < _platformTransform.transform.position.x - _platformWidth/2 + 0.5f)
+			if(this.transform.position.x < _platformTransform.transform.position.x - _platformWidth/2 + 0.5f) //bounds right
 			{
 				Debug.Log("Right");
 				_moveDirection = 1;
 			} 
-			else if(this.transform.position.x > _platformTransform.transform.position.x + _platformWidth/2 - 0.5f)
+			else if(this.transform.position.x > _platformTransform.transform.position.x + _platformWidth/2 - 0.5f) //bounds left
 			{
 				Debug.Log("Left");
 				_moveDirection = -1;
-
 			}
 		} else if (_platformTransform = null) 
 		{
-			this.transform.Translate (Vector2.down * 0 * Time.deltaTime);
+			this.transform.Translate (Vector2.down * 0 * Time.deltaTime); //gravity
 		}
 		transform.Translate (Vector2.right * _moveDirection * _moveSpeed * Time.deltaTime);
 	}
@@ -60,9 +59,11 @@ public class EnemyRed : Enemy
             }
         }
         if(dir == Vector2.right || dir == Vector2.left)
-        {
-            if (other.transform.tag != Tags.PLAYER)
+		{
+            if (other.transform.tag != Tags.PLAYER){
                 _moveDirection *= -1;
+
+			}
         }
 	}
 }

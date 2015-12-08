@@ -28,7 +28,6 @@ public class MainMenu : MonoBehaviour
 		_deleteButtonY = GameObject.Find ("DeleteYes");
 		_deleteButtonN = GameObject.Find ("DeleteNo");
 
-
 	}
 
 	void Start ()
