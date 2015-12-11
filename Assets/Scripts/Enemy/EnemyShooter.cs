@@ -1,30 +1,54 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EnemyShooter : EnemyRed 
 {
 
 	private BoxCollider2D _playerDetection;
+	private List<GameObject> detectedObjects = new List<GameObject>();
 
-	void Start()
-	{
-		_playerDetection = gameObject.AddComponent<BoxCollider2D> () as BoxCollider2D;
-		_playerDetection.isTrigger = true;
-		_playerDetection.size = new Vector2 (10, 10);
-	}
-
+	private GameObject _shootable;
+	private float _timer = 5;
 
 	public override void Update()
 	{
 		base.Update ();
-		//check when player is close
+		Timer ();
+		
+	}
+
+	void Timer()
+	{
+		_timer -= Time.deltaTime;
+
+		if (_timer <= 0) {
+			Detect();
+			_timer = 5;
+		}
 	}
 
 	public override void OnTouchStarted(GameObject other, Vector2 dir)
 	{
-		if (other.gameObject.tag == "player") 
+		base.OnTouchStarted (other, dir);
+	}
+
+	//Detecting objects within the drawn collider
+	private void Detect()
+	{
+		Vector2 a = new Vector2 (this.gameObject.transform.position.x - 5, this.gameObject.transform.position.y + 5);
+		Vector2 b = new Vector2 (this.gameObject.transform.position.x + 5, this.gameObject.transform.position.y - 5);
+		Collider2D[] itemsInCollider = Physics2D.OverlapAreaAll (a, b);
+
+
+
+		foreach (Collider2D col in itemsInCollider) 
 		{
-			Shoot();
+			if(col.tag == "Player" || _timer <= 0)
+			{
+				this.transform.LookAt(col.transform);
+				Shoot();
+			}
 		}
 	}
 
@@ -36,7 +60,6 @@ public class EnemyShooter : EnemyRed
 	private void Shoot()
 	{
 		Debug.Log ("shoot player");
+		_shootable = _objectPool.GetObjectForType ("Bullet", false) as GameObject;
 	}
-
-
 }
