@@ -33,5 +33,6 @@ public class Coin : GrabAble {
 
         //Adding score
         _gameController.score += 100;
+        _gameController.silverCoins++;
     }
 }

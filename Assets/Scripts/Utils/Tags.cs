@@ -16,4 +16,5 @@ public class Tags : MonoBehaviour {
     public const string ENDPOINT =          "EndPoint";
     public const string FADESCREEN =        "FadeScreen";
     public const string GOLDCOIN =          "GoldCoin";
+    public const string WINSCREEN =         "WinScreen";
 }

@@ -126,14 +126,14 @@ public class Movement : MonoBehaviour {
         }
         if (dir == Vector2.left)
         {
-            if (other.transform.tag != Tags.PLAYER && other.transform.tag != Tags.THROWABLE && other.transform.tag != Tags.PLAYERHAND && other.transform.tag != Tags.PUZZLEOBJECT)
+            if (other.transform.tag != Tags.PLAYER && other.transform.tag != Tags.THROWABLE && other.transform.tag != Tags.PUZZLEOBJECT)
             {
                 _touchingDir = -1;
             }
         }
         if (dir == Vector2.right)
         {
-            if (other.transform.tag != Tags.PLAYER && other.transform.tag != Tags.THROWABLE && other.transform.tag != Tags.PLAYERHAND && other.transform.tag != Tags.PUZZLEOBJECT)
+            if (other.transform.tag != Tags.PLAYER && other.transform.tag != Tags.THROWABLE && other.transform.tag != Tags.PUZZLEOBJECT)
             {
                 _touchingDir = 1;
             }

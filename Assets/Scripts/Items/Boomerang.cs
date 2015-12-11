@@ -47,7 +47,9 @@ public class Boomerang : ThrowAble {
             RotateColor();
         }
         if (_grabbedObject != null)
+        {
             _grabbedObject.position = this.transform.position;
+        }
     }
 
     /// <summary>
@@ -182,7 +184,6 @@ public class Boomerang : ThrowAble {
         _returningToHand = false;
         _target = Vector3.zero;
         _isMoving = false;
-        this.transform.position -= new Vector3(0, 0.5f, 0);
         _particleSystem.enableEmission = false;
     }
 

@@ -9,7 +9,10 @@ public class GameController : MonoBehaviour {
     public event NormalDelegate OnScoreUpdated;
     public event NormalDelegate OnLivesUpdated;
 
+    private int _levelCount = 1;
+
     private int _score;
+    private int _silverCoins = 0;
     private int _lives = 3;
     private int _level = 0;
     private Dictionary<int, bool[]> _levelGoldCoinsCollected = new Dictionary<int, bool[]>();
@@ -36,33 +39,60 @@ public class GameController : MonoBehaviour {
             DontDestroyOnLoad(gameObject);
             Instance = this;
         }
+
+        //check if event onnewgame has been triggered
+        GetComponent<SaveLoadDataSerialized>().OnNewGame += SetStandardValues;
+
+        //this will be deleted if the saveloaddata is applied to the menu
+        if (!_levelGoldCoinsCollected.ContainsKey(_level))
+        {
+            _levelGoldCoinsCollected[_level] = new bool[3];
+            _levelGoldCoinsCollected[_level][1] = true;
+            StartGame();
+        }
     }
 
-    void OnLevelWasLoaded(int level)
+    /// <summary>
+    /// Setting standard values if a new game has been started
+    /// </summary>
+    void SetStandardValues()
     {
-        if (level > 0)
+        _level = 0;
+        _lives = 3;
+        _score = 0;
+        _silverCoins = 0;
+
+        for (int i = 0; i < _levelCount; i++) //Check how many levels are currently in the game and make a empty dictionary for each level.
+        {
+            _levelGoldCoinsCollected.Add(i, new bool[3]);
+        }
+    }
+
+    void OnLevelWasLoaded(int value)
+    {
+        if (value > 0)
             StartGame();
     }
 
     void StartGame()
     {
+        _fadeScreen = GameObject.FindGameObjectWithTag(Tags.FADESCREEN);
         _player = GameObject.FindGameObjectWithTag(Tags.PLAYER);
         Player currentPlayerScript = _player.GetComponent<Player>();
         currentPlayerScript.OnDeath += PlayerDeath;
-        currentPlayerScript.OnWin += LevelCompleted;
+        currentPlayerScript.OnWin += OnLevelCompleted;
         currentPlayerScript.OnCheckpointTouched += SetCheckPointPosition;
-        currentPlayerScript.OnGoldCoinCatched += GetGoldCoin;
-
-        _fadeScreen = GameObject.FindGameObjectWithTag(Tags.FADESCREEN);
+        currentPlayerScript.OnGoldCoinCatched += GoldCoinGrabbed;
     }
 
     /// <summary>
     /// Triggers when the level has been completed
     /// </summary>
-    private void LevelCompleted()
+    private void OnLevelCompleted()
     {
         //Fade the black screen to alpha 1
         _fadeScreen.GetComponent<FadeInOut>().Fade(1);
+        Debug.Log("fading fadescreen");
         _fadeScreen.GetComponent<FadeInOut>().OnFadeEnd += ShowWinScreen;
     }
 
@@ -71,10 +101,14 @@ public class GameController : MonoBehaviour {
         PauseOrResume();
         _gameEnded = true;
 
-        //TODO: show win screen
+        GameObject.FindGameObjectWithTag(Tags.WINSCREEN).GetComponent<WinScreen>().ShowWinScreen();
     }
 
-    private void GetGoldCoin(int index)
+    /// <summary>
+    /// Set wich gold coin to true
+    /// </summary>
+    /// <param name="index"></param>
+    private void GoldCoinGrabbed(int index)
     {
         _levelGoldCoinsCollected[_level][index] = true;
     }
@@ -143,6 +177,9 @@ public class GameController : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// get paused game
+    /// </summary>
     public bool isPaused
     {
         get
@@ -183,6 +220,9 @@ public class GameController : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Public int level getter and setter
+    /// </summary>
     public int level
     {
         get
@@ -211,6 +251,10 @@ public class GameController : MonoBehaviour {
                 OnLivesUpdated();
         }
     }
+
+    /// <summary>
+    /// Public dictionary that checks the level[int] and wich coin has been taken or not array boolean [coin1,coin2,coin3]
+    /// </summary>
     public Dictionary<int, bool[]> goldCoins
     {
         get
@@ -220,6 +264,21 @@ public class GameController : MonoBehaviour {
         set
         {
             _levelGoldCoinsCollected = value;
+        }
+    }
+
+    /// <summary>
+    /// Getter and setter for the int _silverCoins
+    /// </summary>
+    public int silverCoins
+    {
+        get
+        {
+            return _silverCoins;
+        }
+        set
+        {
+            _silverCoins = value;
         }
     }
 }

@@ -16,6 +16,13 @@ public class ThrowingHand : MonoBehaviour {
     private float _standardY = 0.75f;
 
     private bool _throwing;
+
+    private BoomerangTrajectory _boomerangTrajectory;
+    void Awake()
+    {
+        _boomerangTrajectory = gameObject.GetComponent<BoomerangTrajectory>();
+    }
+
     void Start()
     {
         _throwAction = gameObject.AddComponent<ThrowAction>();
@@ -37,19 +44,23 @@ public class ThrowingHand : MonoBehaviour {
         {
             //rotates the hand in the direction of the mouse
             Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
-            Vector3 dir = Input.mousePosition - pos;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            Vector3 playerScreenPos = Camera.main.WorldToScreenPoint(_player.transform.position);
+            if (Vector3.Distance(playerScreenPos, Input.mousePosition) > 150)
+            {
+                Vector3 dir = Input.mousePosition - pos;
+                float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-            Vector3 distance = dir - _player.transform.position;
-            Vector3 newHandPos = distance.normalized;
+                Vector3 distance = dir - _player.transform.position;
+                Vector3 newHandPos = distance.normalized;
 
-            if (_player.transform.localScale.x != -1)
-                newHandPos.x *= -1;
+                if (_player.transform.localScale.x != -1)
+                    newHandPos.x *= -1;
 
-            newHandPos.y *= -1;
-            newHandPos.y += _standardY;
-            this.transform.localPosition = newHandPos;
+                newHandPos.y *= -1;
+                newHandPos.y += _standardY;
+                this.transform.localPosition = newHandPos;
+            }
         }
         else if (_currentAnimTime > Time.time)
         {
@@ -91,6 +102,8 @@ public class ThrowingHand : MonoBehaviour {
         {
             _throwObject = throwObject;
             _throwAction.ThrowObjectAction += ThrowObject;
+            if (_throwObject.GetComponent<Boomerang>())
+                _boomerangTrajectory.enabled = true;
         }
     }
 
@@ -104,6 +117,8 @@ public class ThrowingHand : MonoBehaviour {
         if (_throwObject != null)
         {
             _throwAction.ThrowObjectAction -= ThrowObject;
+            if (_throwObject.GetComponent<Boomerang>())
+                _boomerangTrajectory.enabled = false;
             _throwObject.GetComponent<ThrowAble>().Throw(aimPos);
             _throwObject = null;
             _currentCatchCooldown = Time.time + _catchCooldown;

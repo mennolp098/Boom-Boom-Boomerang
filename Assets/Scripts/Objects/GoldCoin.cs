@@ -16,10 +16,15 @@ public class GoldCoin : GrabAble {
         GameObject gameController = GameObject.FindGameObjectWithTag(Tags.GAMECONTROLLER);
         _gameController = gameController.GetComponent<GameController>();
         _objectPool = gameController.GetComponent<ObjectPool>();
+    }
 
+    void Start()
+    {
         if (_gameController.goldCoins[_gameController.level][goldCoinIndex])
         {
-            this.GetComponent<SpriteRenderer>().color = Color.gray;
+            Color newColor = Color.gray;
+            newColor.a = 0.5f;
+            this.GetComponent<SpriteRenderer>().color = newColor;
             _alreadyCatched = true;
         }
     }
@@ -34,20 +39,20 @@ public class GoldCoin : GrabAble {
         base.ObjectCatched();
         if (!_alreadyCatched)
         {
-            //Creating a UI text for additional player feedback
-            GameObject text = _objectPool.GetObjectForType("Text", false) as GameObject; //using the object pool for performance
-            text.transform.position = this.transform.position;
-            text.GetComponent<Text>().text = "+500";
-            text.GetComponent<Text>().color = Color.green;
-            AdditionalTextFunctions textScript = text.GetComponent<AdditionalTextFunctions>();
-            textScript.SetPosition(this.transform.position + new Vector3(Random.Range(-1, 1), Random.Range(0, 2), 0));
-            textScript.SetAbleToMove(true);
-            textScript.SetResetTime(1);
-
             Instantiate(flashParticles, this.transform.position, Quaternion.identity);
-
-            //Adding score
-            _gameController.score += 500;
+            _gameController.goldCoins[_gameController.level][goldCoinIndex] = true;
         }
+        //Creating a UI text for additional player feedback
+        GameObject text = _objectPool.GetObjectForType("Text", false) as GameObject; //using the object pool for performance
+        text.transform.position = this.transform.position;
+        text.GetComponent<Text>().text = "+500";
+        text.GetComponent<Text>().color = Color.green;
+        AdditionalTextFunctions textScript = text.GetComponent<AdditionalTextFunctions>();
+        textScript.SetPosition(this.transform.position + new Vector3(Random.Range(-1, 1), Random.Range(0, 2), 0));
+        textScript.SetAbleToMove(true);
+        textScript.SetResetTime(1);
+
+        //Adding score
+        _gameController.score += 500;
     }
 }

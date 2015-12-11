@@ -1,0 +1,936 @@
+fileFormatVersion: 2
+guid: 21fc6cd4552d4154ba0b090b60780f35
+timeCreated: 1449824133
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: key_crystal_90x90_0
+    21300002: key_crystal_90x90_1
+    21300004: key_crystal_90x90_2
+    21300006: key_crystal_90x90_3
+    21300008: key_crystal_90x90_4
+    21300010: key_crystal_90x90_5
+    21300012: key_crystal_90x90_6
+    21300014: key_crystal_90x90_7
+    21300016: key_crystal_90x90_8
+    21300018: key_crystal_90x90_9
+    21300020: key_crystal_90x90_10
+    21300022: key_crystal_90x90_11
+    21300024: key_crystal_90x90_12
+    21300026: key_crystal_90x90_13
+    21300028: key_crystal_90x90_14
+    21300030: key_crystal_90x90_15
+    21300032: key_crystal_90x90_16
+    21300034: key_crystal_90x90_17
+    21300036: key_crystal_90x90_18
+    21300038: key_crystal_90x90_19
+    21300040: key_crystal_90x90_20
+    21300042: key_crystal_90x90_21
+    21300044: key_crystal_90x90_22
+    21300046: key_crystal_90x90_23
+    21300048: key_crystal_90x90_24
+    21300050: key_crystal_90x90_25
+    21300052: key_crystal_90x90_26
+    21300054: key_crystal_90x90_27
+    21300056: key_crystal_90x90_28
+    21300058: key_crystal_90x90_29
+    21300060: key_crystal_90x90_30
+    21300062: key_crystal_90x90_31
+    21300064: key_crystal_90x90_32
+    21300066: key_crystal_90x90_33
+    21300068: key_crystal_90x90_34
+    21300070: key_crystal_90x90_35
+    21300072: key_crystal_90x90_36
+    21300074: key_crystal_90x90_37
+    21300076: key_crystal_90x90_38
+    21300078: key_crystal_90x90_39
+    21300080: key_crystal_90x90_40
+    21300082: key_crystal_90x90_41
+    21300084: key_crystal_90x90_42
+    21300086: key_crystal_90x90_43
+    21300088: key_crystal_90x90_44
+    21300090: key_crystal_90x90_45
+    21300092: key_crystal_90x90_46
+    21300094: key_crystal_90x90_47
+    21300096: key_crystal_90x90_48
+    21300098: key_crystal_90x90_49
+    21300100: key_crystal_90x90_50
+    21300102: key_crystal_90x90_51
+    21300104: key_crystal_90x90_52
+    21300106: key_crystal_90x90_53
+    21300108: key_crystal_90x90_54
+    21300110: key_crystal_90x90_55
+    21300112: key_crystal_90x90_56
+    21300114: key_crystal_90x90_57
+    21300116: key_crystal_90x90_58
+    21300118: key_crystal_90x90_59
+    21300120: key_crystal_90x90_60
+    21300122: key_crystal_90x90_61
+    21300124: key_crystal_90x90_62
+    21300126: key_crystal_90x90_63
+    21300128: key_crystal_90x90_64
+    21300130: key_crystal_90x90_65
+    21300132: key_crystal_90x90_66
+    21300134: key_crystal_90x90_67
+    21300136: key_crystal_90x90_68
+    21300138: key_crystal_90x90_69
+    21300140: key_crystal_90x90_70
+    21300142: key_crystal_90x90_71
+    21300144: key_crystal_90x90_72
+    21300146: key_crystal_90x90_73
+    21300148: key_crystal_90x90_74
+    21300150: key_crystal_90x90_75
+    21300152: key_crystal_90x90_76
+    21300154: key_crystal_90x90_77
+    21300156: key_crystal_90x90_78
+    21300158: key_crystal_90x90_79
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: key_crystal_90x90_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 934
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_1
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 934
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_2
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 934
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_3
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 934
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_4
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 934
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_5
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 934
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_6
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 934
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_7
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 934
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_8
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 934
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_9
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 934
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_10
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 934
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 844
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_12
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 844
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_13
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 844
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_14
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 844
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_15
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 844
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_16
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 844
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_17
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 844
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_18
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 844
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_19
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 844
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_20
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 844
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_21
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 844
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_22
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 754
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_23
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 754
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_24
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 754
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_25
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 754
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_26
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 754
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_27
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 754
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_28
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 754
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_29
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 754
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_30
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 754
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_31
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 754
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_32
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 754
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_33
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 664
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_34
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 664
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_35
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 664
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_36
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 664
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_37
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 664
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_38
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 664
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_39
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 664
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_40
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 664
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_41
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 664
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_42
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 664
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_43
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 664
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_44
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 574
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_45
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 574
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_46
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 574
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_47
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 574
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_48
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 574
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_49
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 574
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_50
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 574
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_51
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 574
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_52
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 574
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_53
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 574
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_54
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 574
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_55
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 484
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_56
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 484
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_57
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 484
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_58
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 484
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_59
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 484
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_60
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 484
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_61
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 484
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_62
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 484
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_63
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 484
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_64
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 484
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_65
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 484
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_66
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 394
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_67
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 394
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_68
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 394
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_69
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 394
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_70
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 394
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_71
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 394
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_72
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 394
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_73
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 394
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_74
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 394
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_75
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 394
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_76
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 394
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_77
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 304
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_78
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 304
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: key_crystal_90x90_79
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 304
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
