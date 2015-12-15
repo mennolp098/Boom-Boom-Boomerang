@@ -15,6 +15,8 @@ public class Player : MonoBehaviour {
     private TouchDetector2D _touchDetector;
     private ObjectPool _objectPool;
 
+    private Rigidbody2D _rigidbody;
+
     void Awake()
     {
         //adding all the player components
@@ -23,6 +25,7 @@ public class Player : MonoBehaviour {
         gameObject.AddComponent<Movement>();
 
         //getting components
+        _rigidbody = GetComponent<Rigidbody2D>();
         _objectPool = GameObject.FindGameObjectWithTag(Tags.GAMECONTROLLER).GetComponent<ObjectPool>();
     }
 
@@ -66,6 +69,10 @@ public class Player : MonoBehaviour {
             if (OnWin != null)
                 OnWin();
         }
+        if(other.transform.tag == Tags.BOTTOMBORDER)
+        {
+            Death();
+        }
     }
 
     /// <summary>
@@ -80,6 +87,7 @@ public class Player : MonoBehaviour {
             if(other.transform.tag == Tags.ENEMY)
             {
                 other.GetComponent<Enemy>().Death();
+                _rigidbody.velocity += new Vector2(0, 2);
             }
             if(other.transform.tag == Tags.CHECKPOINT)
             {

@@ -18,6 +18,7 @@ public class Lever : PuzzleObject {
         base.Activate();
         _myAnimator.SetTrigger("Pull");
 
+        _isActivateAble = false;
         //activates a certain object with the puzzleobject component added to it
         objectToActivate.Activate();
     }

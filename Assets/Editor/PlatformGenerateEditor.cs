@@ -16,10 +16,10 @@ public class PlatformGenerateEditor : EditorWindow
     [MenuItem("PlatformGenerator/Show Window %i")]
     public static void ShowWindow()
     {
-
+        GUIContent newWindowContent = new GUIContent("PlatformGenerator", (Texture)AssetDatabase.LoadAssetAtPath("Assets/Art/PlatformTiles/tile5.png", typeof(Texture)), "Tool to generate new platforms with width and height");
         _window = EditorWindow.GetWindow(typeof(PlatformGenerateEditor));
         _platformGenerator = new PlatformGenerator();
-        _window.title = "GeneratePlatform";
+        _window.titleContent = newWindowContent;
     }
 
     private void OnGUI()

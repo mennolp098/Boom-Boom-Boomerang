@@ -9,6 +9,7 @@ public class PlayerInput : MonoBehaviour {
     public event IntDelegate LeftKeyPressed;
     public event NormalDelegate MouseButtonPressed;
     public event NormalDelegate NoKeyPressed;
+    public event NormalDelegate EscapeKeyPressed;
 
     private void Update()
     {
@@ -53,6 +54,14 @@ public class PlayerInput : MonoBehaviour {
             if (MouseButtonPressed != null)
                 MouseButtonPressed();
         }
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            aKeyIsPressed = true;
+            if (EscapeKeyPressed != null)
+                EscapeKeyPressed();
+        }
+
         if (!aKeyIsPressed)
         {
             if (NoKeyPressed != null)

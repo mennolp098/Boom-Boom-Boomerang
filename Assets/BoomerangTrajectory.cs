@@ -11,6 +11,7 @@ public class BoomerangTrajectory : MonoBehaviour {
     private List<Vector3> _stepPositions = new List<Vector3>();
 
     private LineRenderer _lineRenderer;
+    private Renderer _renderer;
 
     void Awake()
     {
@@ -29,10 +30,13 @@ public class BoomerangTrajectory : MonoBehaviour {
 
     void Update()
     {
-        Vector3 pos = Input.mousePosition;
-        pos.z = 10f;
-        pos = Camera.main.ScreenToWorldPoint(pos);
-        CalculateSteps(pos);
+        if (!GameController.Instance.isPaused)
+        {
+            Vector3 pos = Input.mousePosition;
+            pos.z = 10f;
+            pos = Camera.main.ScreenToWorldPoint(pos);
+            CalculateSteps(pos);
+        }
     }
 
     void CalculateSteps(Vector3 pos)
@@ -46,18 +50,15 @@ public class BoomerangTrajectory : MonoBehaviour {
         {
             Vector2 targetPosition = pos;
 
-            Vector2 desiredStep = targetPosition - new Vector2(transform.position.x, transform.position.y);
+            Vector2 desiredStep = targetPosition - new Vector2(stepPosition.x, stepPosition.y);
 
             Vector2 desiredVelocity = desiredStep.normalized * _speed;
 
             Vector2 steeringForce = desiredVelocity - _directionMoving;
             _directionMoving += (steeringForce / _mass);
             stepPosition += new Vector3(_directionMoving.x, _directionMoving.y, 0) * 0.019f;
-            if (i % 2 == 0)
-            {
-                _lineRenderer.SetPosition(lineSteps, stepPosition);
-                lineSteps++;
-            }
+            _lineRenderer.SetPosition(lineSteps, stepPosition);
+            lineSteps++;
         }
     }
 }

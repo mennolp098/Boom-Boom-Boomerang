@@ -20,7 +20,6 @@ public class Door : PuzzleObject {
     public override void Activate()
     {
         base.Activate();
-        Debug.Log("activated");
         _activated = true;
     }
 

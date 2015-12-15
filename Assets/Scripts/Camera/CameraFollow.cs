@@ -3,6 +3,7 @@ using System.Collections;
 
 public class CameraFollow : MonoBehaviour {
     private Transform _player;
+    private float _camSpeed = 20;
     private float _maxX = 1;
     private float _minX = -1;
     private float _maxY = 1;
@@ -13,8 +14,8 @@ public class CameraFollow : MonoBehaviour {
     }
 
 	void Update () {
-        transform.position = new Vector3(Mathf.Clamp(this.transform.position.x, _player.position.x + _minX, _player.position.x + _maxX),
+        transform.position = Vector3.Lerp(this.transform.position,new Vector3(Mathf.Clamp(this.transform.position.x, _player.position.x + _minX, _player.position.x + _maxX),
             Mathf.Clamp(this.transform.position.y, _player.position.y + _minY, _player.position.y + _maxY),
-            -10);
+            -10), _camSpeed * Time.deltaTime);
     }
 }

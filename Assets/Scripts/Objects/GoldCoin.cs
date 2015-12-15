@@ -11,8 +11,9 @@ public class GoldCoin : GrabAble {
     private ObjectPool _objectPool;
 
     private bool _alreadyCatched;
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         GameObject gameController = GameObject.FindGameObjectWithTag(Tags.GAMECONTROLLER);
         _gameController = gameController.GetComponent<GameController>();
         _objectPool = gameController.GetComponent<ObjectPool>();
@@ -20,12 +21,16 @@ public class GoldCoin : GrabAble {
 
     void Start()
     {
-        if (_gameController.goldCoins[_gameController.level][goldCoinIndex])
+        //if the goldcoin is already grabbed in the certain level
+        if (_gameController.goldCoins.ContainsKey(Application.loadedLevel))
         {
-            Color newColor = Color.gray;
-            newColor.a = 0.5f;
-            this.GetComponent<SpriteRenderer>().color = newColor;
-            _alreadyCatched = true;
+            if (_gameController.goldCoins[Application.loadedLevel][goldCoinIndex])
+            {
+                Color newColor = Color.gray;
+                newColor.a = 0.5f;
+                this.GetComponent<SpriteRenderer>().color = newColor;
+                _alreadyCatched = true;
+            }
         }
     }
 
@@ -40,7 +45,7 @@ public class GoldCoin : GrabAble {
         if (!_alreadyCatched)
         {
             Instantiate(flashParticles, this.transform.position, Quaternion.identity);
-            _gameController.goldCoins[_gameController.level][goldCoinIndex] = true;
+            _gameController.goldCoins[Application.loadedLevel][goldCoinIndex] = true;
         }
         //Creating a UI text for additional player feedback
         GameObject text = _objectPool.GetObjectForType("Text", false) as GameObject; //using the object pool for performance

@@ -5,8 +5,9 @@ using UnityEngine.UI;
 public class Coin : GrabAble {
     private GameController _gameController;
     private ObjectPool _objectPool;
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         GameObject gameController = GameObject.FindGameObjectWithTag(Tags.GAMECONTROLLER);
         _gameController = gameController.GetComponent<GameController>();
         _objectPool = gameController.GetComponent<ObjectPool>();

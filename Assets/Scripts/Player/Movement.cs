@@ -84,7 +84,7 @@ public class Movement : MonoBehaviour {
                 }
                 Vector3 movement = new Vector3(1, 0, 0);
                 movement.x *= dir;
-                _rigidbody.transform.position += movement * _dampSpeed * Time.deltaTime;
+                transform.position += movement * _dampSpeed * Time.deltaTime;
                 transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * dir, transform.localScale.y, transform.localScale.z);
             }
         }

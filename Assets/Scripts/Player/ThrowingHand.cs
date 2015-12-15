@@ -1,94 +1,49 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ThrowingHand : MonoBehaviour {
-    private ThrowAction _throwAction;
-    private GameObject _player;
-    private GameObject _throwObject;
-    private Vector3 _currentAnimPos;
-
+public class ThrowingHand : HandOrbit {
     private float _catchCooldown = 1;
     private float _currentCatchCooldown;
 
-    private float _animTime = 0.1f;
-    private float _currentAnimTime;
-    private float _animSpeed = 100;
-    private float _standardY = 0.75f;
-
-    private bool _throwing;
-
+    private GameObject _throwObject;
     private BoomerangTrajectory _boomerangTrajectory;
+
     void Awake()
     {
         _boomerangTrajectory = gameObject.GetComponent<BoomerangTrajectory>();
+
+        OnAimingToClose += DisableTrajectory;
+        OnAiming += EnableTrajectory;
     }
 
-    void Start()
-    {
-        _throwAction = gameObject.AddComponent<ThrowAction>();
-        _player = GameObject.FindGameObjectWithTag(Tags.PLAYER);
-        _throwAction.ThrowObjectAction += HandAnim;
-    }
-    /// <summary>
-    /// Starts animation if item is thrown
-    /// </summary>
-    /// <param name="mousepos"></param>
-    void HandAnim(Vector3 mousepos)
-    {
-        _throwing = true;
-        _currentAnimPos = Input.mousePosition;
-        _currentAnimTime = Time.time + _animTime;
-    }
-	void Update () {
-        if (!_throwing)
+	protected override void Update () {
+        base.Update();
+        if(_throwObject != null)
         {
-            //rotates the hand in the direction of the mouse
-            Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
-            Vector3 playerScreenPos = Camera.main.WorldToScreenPoint(_player.transform.position);
-            if (Vector3.Distance(playerScreenPos, Input.mousePosition) > 150)
-            {
-                Vector3 dir = Input.mousePosition - pos;
-                float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-                Vector3 distance = dir - _player.transform.position;
-                Vector3 newHandPos = distance.normalized;
-
-                if (_player.transform.localScale.x != -1)
-                    newHandPos.x *= -1;
-
-                newHandPos.y *= -1;
-                newHandPos.y += _standardY;
-                this.transform.localPosition = newHandPos;
-            }
-        }
-        else if (_currentAnimTime > Time.time)
-        {
-            //the throw animation
-            _currentAnimPos.y -= _animSpeed;
-
-            Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
-            Vector3 dir = _currentAnimPos - pos;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-            Vector3 distance = dir - _player.transform.position;
-            Vector3 newHandPos = distance.normalized;
-            if (_player.transform.localScale.x != -1)
-                newHandPos.x *= -1;
-
-            newHandPos.y *= -1;
-            newHandPos.y += _standardY;
-            this.transform.localPosition = newHandPos;
-        }
-        else
-        {
-            _throwing = false;
-        }
-        if (_throwObject != null)
-        {
-            _throwObject.transform.position = this.transform.position;
+            _throwObject.transform.position = Vector3.Lerp(_throwObject.transform.position, this.transform.position, 100 * Time.deltaTime);
             _throwObject.transform.rotation = this.transform.rotation;
+        }
+    }
+
+    /// <summary>
+    /// Disable the trajectory of the certain throwable object
+    /// </summary>
+    void DisableTrajectory()
+    {
+        if (_throwObject != null && _throwObject.GetComponent<Boomerang>())
+        {
+            _boomerangTrajectory.enabled = false;
+        }
+    }
+
+    /// <summary>
+    /// Enable the trajectory of the certain throwable object
+    /// </summary>
+    void EnableTrajectory()
+    {
+        if (_throwObject != null && _throwObject.GetComponent<Boomerang>())
+        {
+            _boomerangTrajectory.enabled = true;
         }
     }
 
@@ -102,8 +57,11 @@ public class ThrowingHand : MonoBehaviour {
         {
             _throwObject = throwObject;
             _throwAction.ThrowObjectAction += ThrowObject;
+            _throwObject.GetComponent<ThrowAble>().inHand = true;
             if (_throwObject.GetComponent<Boomerang>())
+            {
                 _boomerangTrajectory.enabled = true;
+            }
         }
     }
 
@@ -117,8 +75,10 @@ public class ThrowingHand : MonoBehaviour {
         if (_throwObject != null)
         {
             _throwAction.ThrowObjectAction -= ThrowObject;
+
             if (_throwObject.GetComponent<Boomerang>())
                 _boomerangTrajectory.enabled = false;
+
             _throwObject.GetComponent<ThrowAble>().Throw(aimPos);
             _throwObject = null;
             _currentCatchCooldown = Time.time + _catchCooldown;

@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour {
     public event NormalDelegate OnScoreUpdated;
     public event NormalDelegate OnLivesUpdated;
 
-    private int _levelCount = 1;
+    private int _levelCount = 2;
 
     private int _score;
     private int _silverCoins = 0;
@@ -41,48 +41,44 @@ public class GameController : MonoBehaviour {
         }
 
         //check if event onnewgame has been triggered
-        GetComponent<SaveLoadDataSerialized>().OnNewGame += SetStandardValues;
+        GetComponent<SaveLoadDataSerialized>().OnNewGame += InitGame;
 
-        //this will be deleted if the saveloaddata is applied to the menu
-        if (!_levelGoldCoinsCollected.ContainsKey(_level))
-        {
-            _levelGoldCoinsCollected[_level] = new bool[3];
-            _levelGoldCoinsCollected[_level][1] = true;
-            StartGame();
-        }
+        if (Application.loadedLevel > 0)
+            InitGame();
     }
 
     /// <summary>
     /// Setting standard values if a new game has been started
     /// </summary>
-    void SetStandardValues()
+    void InitGame()
     {
         _level = 0;
         _lives = 3;
         _score = 0;
         _silverCoins = 0;
-
-        for (int i = 0; i < _levelCount; i++) //Check how many levels are currently in the game and make a empty dictionary for each level.
+        for (int i = 0; i < _levelCount+1; i++) //Check how many levels are currently in the game and make a empty dictionary for each level.
         {
-            _levelGoldCoinsCollected.Add(i, new bool[3]);
+            bool[] newBoolarray = new bool[3];
+            newBoolarray[0] = false;
+            newBoolarray[1] = false;
+            newBoolarray[2] = false;
+            _levelGoldCoinsCollected.Add(i, newBoolarray);
         }
-    }
-
-    void OnLevelWasLoaded(int value)
-    {
-        if (value > 0)
-            StartGame();
+        StartGame();
     }
 
     void StartGame()
     {
         _fadeScreen = GameObject.FindGameObjectWithTag(Tags.FADESCREEN);
         _player = GameObject.FindGameObjectWithTag(Tags.PLAYER);
+        
         Player currentPlayerScript = _player.GetComponent<Player>();
         currentPlayerScript.OnDeath += PlayerDeath;
         currentPlayerScript.OnWin += OnLevelCompleted;
         currentPlayerScript.OnCheckpointTouched += SetCheckPointPosition;
         currentPlayerScript.OnGoldCoinCatched += GoldCoinGrabbed;
+
+        _player.GetComponent<PlayerInput>().EscapeKeyPressed += PauseOrResume;
     }
 
     /// <summary>
@@ -92,16 +88,16 @@ public class GameController : MonoBehaviour {
     {
         //Fade the black screen to alpha 1
         _fadeScreen.GetComponent<FadeInOut>().Fade(1);
-        Debug.Log("fading fadescreen");
-        _fadeScreen.GetComponent<FadeInOut>().OnFadeEnd += ShowWinScreen;
+        _fadeScreen.GetComponent<FadeInOut>().OnFadeEnd += Win;
     }
 
-    private void ShowWinScreen(float fadeValue = 0)
+    private void Win(float fadeValue = 0)
     {
         PauseOrResume();
         _gameEnded = true;
 
-        GameObject.FindGameObjectWithTag(Tags.WINSCREEN).GetComponent<WinScreen>().ShowWinScreen();
+        if (_level < Application.loadedLevel)
+            _level++;
     }
 
     /// <summary>
@@ -121,7 +117,9 @@ public class GameController : MonoBehaviour {
         if(_lives > 0)
         {
             _lives--;
-            RespawnPlayer();
+            //adding a fade effect to the death
+            _fadeScreen.GetComponent<FadeInOut>().Fade(1);
+            _fadeScreen.GetComponent<FadeInOut>().OnFadeEnd += RespawnPlayer;
         }
         else
         {
@@ -140,11 +138,12 @@ public class GameController : MonoBehaviour {
     /// <summary>
     /// set player position to checkpointposition and unpause movement
     /// </summary>
-    private void RespawnPlayer()
+    private void RespawnPlayer(float value = 0)
     {
         _player.transform.position = _checkpointPosition;
         _player.GetComponent<Movement>().enabled = true;
-        //TODO: unpause movement
+        _fadeScreen.GetComponent<FadeInOut>().OnFadeEnd -= RespawnPlayer;
+        _fadeScreen.GetComponent<FadeInOut>().Fade(0);
     }
 
     /// <summary>
@@ -279,6 +278,18 @@ public class GameController : MonoBehaviour {
         set
         {
             _silverCoins = value;
+        }
+    }
+
+    public bool gameEnded
+    {
+        get
+        {
+            return _gameEnded;
+        }
+        set
+        {
+            _gameEnded = value;
         }
     }
 }

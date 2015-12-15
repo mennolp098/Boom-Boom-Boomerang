@@ -34,21 +34,24 @@ public class Boomerang : ThrowAble {
 
     void Update()
     {
-        if (_target != Vector3.zero) //here we check if there is a target
+        if (!GameController.Instance.isPaused)
         {
-            MoveTowardsPosition(_target); //using the movetowards function to go to the current position it's targeting at.
-            RotateAnimation();
-            RotateColor();
-        }
-        else if(_returningToHand)
-        {
-            MoveTowardsPosition(_playerHand.transform.position);
-            RotateAnimation();
-            RotateColor();
-        }
-        if (_grabbedObject != null)
-        {
-            _grabbedObject.position = this.transform.position;
+            if (_target != Vector3.zero) //here we check if there is a target
+            {
+                MoveTowardsPosition(_target); //using the movetowards function to go to the current position it's targeting at.
+                RotateAnimation();
+                RotateColor();
+            }
+            else if (_returningToHand)
+            {
+                MoveTowardsPosition(_playerHand.transform.position);
+                RotateAnimation();
+                RotateColor();
+            }
+            if (_grabbedObject != null)
+            {
+                _grabbedObject.position = this.transform.position;
+            }
         }
     }
 
@@ -162,6 +165,7 @@ public class Boomerang : ThrowAble {
         DestinationReached += MoveBack;
         _isMoving = true;
         _particleSystem.enableEmission = true;
+        _inHand = false;
     }
 
     /// <summary>
@@ -189,10 +193,10 @@ public class Boomerang : ThrowAble {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (_isMoving)
+        if (_isMoving && !_inHand)
         {
             
-            if (other.transform.tag != Tags.PLAYER)
+            if (other.transform.tag != Tags.PLAYER && other.transform.tag != Tags.PLAYERHAND)
             {
                 if (other.GetComponent<GrabAble>()) //if the object touched has the grabable component.
                 {
